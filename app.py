@@ -179,8 +179,21 @@ st.markdown(
         background: transparent;
     }
 
+    html, body, [data-testid="stAppViewContainer"], .stApp {
+        color-scheme: light !important;
+    }
+
     .stApp {
         background: var(--cream);
+        color: var(--text);
+    }
+
+    /* Paksa teks widget Streamlit tetap gelap pada browser HP yang memakai dark mode. */
+    .stApp,
+    .stApp p,
+    .stApp span,
+    .stApp label,
+    .stApp small {
         color: var(--text);
     }
 
@@ -253,10 +266,33 @@ st.markdown(
 
     div[data-testid="stCameraInput"],
     div[data-testid="stFileUploader"] {
-        background: #FAFCFA;
+        background: #FAFCFA !important;
         border: 2px dashed #A4B8A8;
         border-radius: 16px;
         padding: 10px;
+        color: var(--text) !important;
+    }
+
+    /* Streamlit dapat mengikuti dark mode browser pada HP.
+       Selector di bawah memaksa area kamera/uploader tetap seperti versi laptop. */
+    div[data-testid="stFileUploaderDropzone"],
+    div[data-testid="stFileUploader"] section,
+    div[data-testid="stCameraInput"] section {
+        background: #F4F6F4 !important;
+        color: var(--text) !important;
+        border-radius: 12px !important;
+    }
+
+    div[data-testid="stFileUploader"] p,
+    div[data-testid="stFileUploader"] span,
+    div[data-testid="stFileUploader"] small,
+    div[data-testid="stFileUploader"] label,
+    div[data-testid="stCameraInput"] p,
+    div[data-testid="stCameraInput"] span,
+    div[data-testid="stCameraInput"] small,
+    div[data-testid="stCameraInput"] label {
+        color: #34433A !important;
+        opacity: 1 !important;
     }
 
     div[data-testid="stCameraInput"] button,
@@ -265,6 +301,16 @@ st.markdown(
         border-radius: 12px;
         font-size: 17px;
         font-weight: 800;
+        background: white !important;
+        color: var(--green-dark) !important;
+        border-color: var(--border) !important;
+        opacity: 1 !important;
+    }
+
+    div[data-testid="stCameraInput"] button *,
+    div[data-testid="stFileUploader"] button * {
+        color: var(--green-dark) !important;
+        opacity: 1 !important;
     }
 
     div[role="radiogroup"] {
@@ -272,10 +318,18 @@ st.markdown(
     }
 
     div[role="radiogroup"] label {
-        background: white;
+        background: white !important;
         border: 1px solid var(--border);
         border-radius: 12px;
         padding: 9px 13px;
+        color: var(--text) !important;
+        opacity: 1 !important;
+    }
+
+    div[role="radiogroup"] label p,
+    div[role="radiogroup"] label span {
+        color: var(--text) !important;
+        opacity: 1 !important;
     }
 
     div.stButton > button {
@@ -288,8 +342,22 @@ st.markdown(
     }
 
     div.stButton > button[kind="primary"] {
-        background: var(--green);
-        color: white;
+        background: var(--green) !important;
+        color: white !important;
+    }
+
+    div.stButton > button[kind="primary"] * {
+        color: white !important;
+    }
+
+    /* Alert/info bawaan Streamlit juga dibuat konsisten di HP. */
+    div[data-testid="stAlert"] {
+        color-scheme: light !important;
+    }
+
+    div[data-testid="stAlert"] p,
+    div[data-testid="stAlert"] span {
+        opacity: 1 !important;
     }
 
     div[data-testid="stImage"] img {
@@ -441,6 +509,30 @@ st.markdown(
         div.stButton > button {
             min-height: 54px;
             font-size: 18px;
+        }
+
+        div[role="radiogroup"] {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+        }
+
+        div[role="radiogroup"] label {
+            width: 100%;
+            min-width: 0;
+            justify-content: flex-start;
+        }
+
+        div[data-testid="stFileUploaderDropzone"],
+        div[data-testid="stFileUploader"] section,
+        div[data-testid="stCameraInput"] section {
+            background: #F4F6F4 !important;
+        }
+
+        div[data-testid="stFileUploader"] button,
+        div[data-testid="stCameraInput"] button {
+            background: #FFFFFF !important;
+            color: var(--green-dark) !important;
         }
     }
     </style>
